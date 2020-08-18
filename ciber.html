@@ -64,7 +64,7 @@
 		</main>
 
 		<script>
-			let alertAllowed = false; // switch on alert() to true in production mode ;)
+			let alertAllowed = true; // switch on alert() to true in production mode ;)
 
 			// Exercise 1
 			console.log("Hola Món :)");
@@ -104,10 +104,10 @@
 			if (alertAllowed) {
 				alert(
 					nota_examen >= 5
-						? `${passed.exclamation + " " + passed.emote}
-			           \nHas ${passed.qualification} l'exàmen amb un ${nota_examen}`
-						: `${failed.exclamation + " " + failed.emote}
-			           \nHas ${failed.qualification} l'exàmen amb un ${nota_examen}`
+						? `${passed.exclamation + " " + passed.emote}\
+            \nHas ${passed.qualification} l'exàmen amb un ${nota_examen}`
+						: `${failed.exclamation + " " + failed.emote}\
+            \nHas ${failed.qualification} l'exàmen amb un ${nota_examen}`
 				);
 			}
 
