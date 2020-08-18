@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Javascript Basic</title>
+		<style>
+			body {
+				margin: 0;
+				box-sizing: border-box;
+				background-color: whitesmoke;
+			}
+			hgroup {
+				padding: 10px;
+				margin: 0;
+				background-color: gold;
+			}
+			h2 {
+				font-style: italic;
+			}
+			main {
+				max-width: 750px;
+				margin: 55px auto 0;
+			}
+			p {
+				padding: 15px;
+				box-shadow: 0px 5px 8px 0px grey;
+			}
+			ul {
+				margin: 0;
+				padding: 15px;
+				padding-left: 15px;
+				list-style-type: none;
+				box-shadow: 0px 5px 8px 0px grey;
+			}
+		</style>
+	</head>
+
+	<body>
+		<hgroup>
+			<h1>Javascript Bàsic</h1>
+			<h2>ciber.html</h2>
+		</hgroup>
+
+		<main>
+			<p>
+				El número &pi; multiplicat per
+				<span>
+					<!-- num -->
+				</span>
+				és
+				<span>
+					<!-- sum result -->
+				</span>
+			</p>
+
+			<ul>
+				<!-- tinc un cotxe... -->
+			</ul>
+
+			<ul>
+				<!-- material d'oficina -->
+			</ul>
+		</main>
+
+		<script>
+			let alertAllowed = false; // switch on alert() to true in production mode ;)
+
+			// Exercise 1
+			console.log("Hola Món :)");
+
+			// Exercise 2
+			if (alertAllowed) alert("Em dic Isaac");
+
+			// Exercise 3
+			const name = "Isaac";
+			const surname = "Bejarano";
+
+			// Exercise 4
+			const PI = Math.PI;
+			let num = 100;
+			const addend = document.querySelector("p span:nth-child(1)");
+			const sum = document.querySelector("p span:nth-child(2)");
+
+			addend.textContent = num;
+			addend.style.color = "blue";
+
+			sum.textContent = PI * num;
+			sum.style.color = "green";
+
+			// Exercise 5
+			const nota_examen = (Math.random() * 10).toFixed(1);
+			const passed = {
+				exclamation: "Genial!",
+				qualification: "aprovat",
+				emote: ":)",
+			};
+			const failed = {
+				exclamation: "Ohh...",
+				qualification: "suspès",
+				emote: ":(",
+			};
+
+			if (alertAllowed) {
+				alert(
+					nota_examen >= 5
+						? `${passed.exclamation + " " + passed.emote}
+			           \nHas ${passed.qualification} l'exàmen amb un ${nota_examen}`
+						: `${failed.exclamation + " " + failed.emote}
+			           \nHas ${failed.qualification} l'exàmen amb un ${nota_examen}`
+				);
+			}
+
+			// Exercise 6
+			const ul1 = document.querySelector("ul:first-of-type");
+			const text1 = "Tinc un cotxe de color blau";
+			const text2 = text1.replace("blau", "verd"); // replace first occurence
+			const text3 = text1.replace(/o/g, "u"); // replace all occurences / regEx global
+
+			// --print out
+			ul1.innerHTML = `<li>${text1}...</li>`;
+			ul1.innerHTML += `<li>${text2}...</li>`;
+			ul1.innerHTML += `<li>${text3}.</li>`;
+
+			// Exercise 7
+			const materials = [
+				{ item: "taula" },
+				{ item: "cadira" },
+				{ item: "ordinador" },
+				{ item: "llibreta" },
+			];
+			const ul2 = document.querySelector("ul:last-of-type");
+
+			// --print out
+			for ([i, material] of materials.entries()) {
+				ul2.innerHTML += `<li>L'objecte "${material.item}" està a la posició ${i}.</li>`;
+			}
+
+			// Exercise 8
+			function calculadora(operador, valor1, valor2) {
+				// operador lower case
+				operador = operador.toLowerCase();
+
+				// Unary Op (+) will coherce [] to number 0
+				valor1 = +valor1;
+				valor2 = +valor2;
+
+				// operations
+				return isNaN(valor1 + valor2)
+					? console.error(
+							`Algun dels valors operats amb "${operador}" no són números`
+					  )
+					: operador === "suma"
+					? valor1 + valor2
+					: operador === "resta"
+					? valor1 - valor2
+					: operador === "multiplica"
+					? valor1 * valor2
+					: console.error(
+							`Operador "${operador}" invàlid\
+			         \nIntrodueix un dels següents operadors acceptats: suma, resta, multiplica`
+					  );
+			}
+
+			// assign + test
+			let resultat1 = calculadora("suMA", 3.3, 5.5);
+			let resultat2 = calculadora("rEstA", 3, 5);
+			let resultat3 = calculadora("ReSTa", 5, 3);
+			let resultat4 = calculadora("mulTiPLicA", 3, 5);
+			let resultat5 = calculadora("MuLtipliCa", -3, 5);
+			let resultat6 = calculadora("mulTIplica", 3, -5);
+			let resultat7 = calculadora("potencia", 3, 5); // fail fn name
+			let resultat8 = calculadora("suma", 3.3, "5.5"); // passed unary op
+			let resultat9 = calculadora("suma", "3.3", 5.5); // passed unary op
+			let resultat10 = calculadora("suma", "3.3", "5.5"); // passed unary op
+			let resultat11 = calculadora("suma", 3.5, "quatre i mig"); // fail args
+			let resultat12 = calculadora("resta", 3.5, "quatre i mig"); // fail args
+			let resultat13 = calculadora("multiplica", 3.5, "quatre i mig"); // fail args
+			let resultat14 = calculadora("suma", [], {}); // fail args
+			let resultat15 = calculadora("suma", {}, {}); // fail args
+			let resultat16 = calculadora("suma", [], []); // passed unary op
+			let resultat17 = calculadora("suma", 3.5, {}); // fail args
+			let resultat18 = calculadora("suma", 3.5, []); // passed unary op
+
+			// --print out
+			console.log("suMA", resultat1);
+			console.log("rEstA", resultat2);
+			console.log("ReSTa", resultat3);
+			console.log("mulTiPLicA", resultat4);
+			console.log("MuLtipliCa", resultat5);
+			console.log("mulTIplica", resultat6);
+			console.log("potencia", resultat7);
+			console.log("suma", resultat8);
+			console.log("suma", resultat9);
+			console.log("suma", resultat10);
+			console.log("suma", resultat11);
+			console.log("resta", resultat12);
+			console.log("multiplica", resultat13);
+			console.log("suma", resultat14);
+			console.log("suma", resultat15);
+			console.log("suma", resultat16);
+			console.log("suma", resultat17);
+			console.log("suma", resultat18);
+		</script>
+	</body>
+</html>
